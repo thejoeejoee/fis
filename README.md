@@ -8,3 +8,5 @@ This is only metapackage used for cloning whole project:
 * [node-red-contrib-fis](https://github.com/thejoeejoee/node-red-contrib-fis) - extension for Node-RED tool
 * [fis-doc](https://github.com/thejoeejoee/fis-doc) - text of bachelor thesis as a main part of this project
 * [fis-node-red](https://github.com/thejoeejoee/fis-node-red) - example runtime for Node-RED
+
+This package also includes `Makefile` rule `pack-disk` for deploying whole thesis as a package for submit.
