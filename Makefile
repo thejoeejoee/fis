@@ -16,8 +16,12 @@ clone-node-red-contrib-fis:
 pull-all:
 	printf "${PACKAGES}" | xargs -d" " -n1 -IPKG git --git-dir=./PKG/.git pull
 
+pack-disk: buid-doc-disk
+	rm xkolar71.zip || true
+	zip -r xkolar71.zip doc-disk/* 
+
 .ONESHELL:
-buid-doc-disk: clone-all
+buid-doc-disk: clone-all pull-all
 	cp doc/xkolar71-*.pdf doc-disk
 	cp -r ${PACKAGES} doc-disk/
 
