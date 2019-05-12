@@ -1,8 +1,12 @@
-/doc/
+/doc
 /esp-firmware
 /node-red-contrib-fis
+/fis-node-red
 
 /doc-disk/doc
 /doc-disk/esp-firmware
 /doc-disk/node-red-contrib-fis
 /doc-disk/xkolar71-koordinace-iot.pdf
+/doc-disk/fis-node-red
+
+/xkolar71.zip

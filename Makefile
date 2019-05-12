@@ -1,6 +1,6 @@
 PACKAGES = esp-firmware doc node-red-contrib-fis fis-node-red
 
-all: clone-all
+all: pack-disk
 
 clone-all: clone-doc clone-esp-firmware clone-node-red-contrib-fis clone-fis-node-red
 
@@ -21,10 +21,14 @@ pull-all:
 
 pack-disk: build-doc-disk
 	rm xkolar71.zip || true
-	zip -r xkolar71.zip doc-disk/* 
+	cd doc-disk && zip -r ../xkolar71.zip ./* && cd .. 
+
+clean:
+	rm -rf ${PACKAGES} doc-disk/{`printf "${PACKAGES}" | tr " " ","`} doc-disk/*.pdf
 
 .ONESHELL:
 build-doc-disk: clone-all pull-all
+	cd doc && make && cd ..
 	cp doc/xkolar71-*.pdf doc-disk
 	cp -r ${PACKAGES} doc-disk/
 
