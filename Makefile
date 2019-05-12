@@ -18,8 +18,7 @@ pull-all:
 
 .ONESHELL:
 buid-doc-disk: clone-all
-	make pull-all
-	cd doc
-	make install && make
-	cd ..
-	cp doc/*.pdf doc-disk
+	cp doc/xkolar71-*.pdf doc-disk
+	cp -r ${PACKAGES} doc-disk/
+
+	find doc-disk -type d -name .git -exec rm -fr "{}" \; || true

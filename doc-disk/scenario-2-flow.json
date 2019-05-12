@@ -1,0 +1,428 @@
+[
+    {
+        "id": "c13abdff.e0442",
+        "type": "tab",
+        "label": "Místnost - displej",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "5a2d81e5.9c875",
+        "type": "fis-neopixel-display",
+        "z": "c13abdff.e0442",
+        "name": "displej",
+        "node": "cb054699.412dd8",
+        "displayPort": "27",
+        "width": "27",
+        "height": "10",
+        "x": 790,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "e0a5701c.6de24",
+        "type": "link in",
+        "z": "c13abdff.e0442",
+        "name": "teplota ",
+        "links": [
+            "7dcd3247.85e52c"
+        ],
+        "x": 395,
+        "y": 520,
+        "wires": [
+            [
+                "51377a4a.50eda4"
+            ]
+        ]
+    },
+    {
+        "id": "3b6e9c31.c6a594",
+        "type": "inject",
+        "z": "c13abdff.e0442",
+        "name": "ticker",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 470,
+        "y": 300,
+        "wires": [
+            [
+                "d8781a4f.d1a2e8"
+            ]
+        ]
+    },
+    {
+        "id": "38096a26.a36536",
+        "type": "debug",
+        "z": "c13abdff.e0442",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 790,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "9a02cdd6.93886",
+        "type": "ui_colour_picker",
+        "z": "c13abdff.e0442",
+        "name": "",
+        "label": "Barva displeje",
+        "group": "6c047cf9.cffd64",
+        "format": "rgb",
+        "outformat": "string",
+        "showSwatch": true,
+        "showPicker": false,
+        "showValue": false,
+        "showHue": false,
+        "showAlpha": false,
+        "showLightness": true,
+        "dynOutput": "false",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "topic": "",
+        "x": 460,
+        "y": 720,
+        "wires": [
+            [
+                "3523ff82.54ec8"
+            ]
+        ]
+    },
+    {
+        "id": "c6ec1259.77933",
+        "type": "change",
+        "z": "c13abdff.e0442",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "color",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3523ff82.54ec8",
+        "type": "function",
+        "z": "c13abdff.e0442",
+        "name": "rgb -> [r, g, b]",
+        "func": "msg.payload = msg.payload.replace('rgb(', '').replace(')', '').replace(/ /g, '').split(',').map(c => new Number(c));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 640,
+        "y": 720,
+        "wires": [
+            [
+                "c6ec1259.77933"
+            ]
+        ]
+    },
+    {
+        "id": "7be76230.5e0e0c",
+        "type": "ui_text_input",
+        "z": "c13abdff.e0442",
+        "name": "",
+        "label": "Statický text",
+        "tooltip": "",
+        "group": "6c047cf9.cffd64",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "",
+        "x": 450,
+        "y": 680,
+        "wires": [
+            [
+                "7b95f9a2.daa2e8"
+            ]
+        ]
+    },
+    {
+        "id": "7b95f9a2.daa2e8",
+        "type": "change",
+        "z": "c13abdff.e0442",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "text",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a65eab1.8ee1f4",
+        "type": "ui_numeric",
+        "z": "c13abdff.e0442",
+        "name": "",
+        "label": "Zobrazení teploty",
+        "tooltip": "",
+        "group": "6c047cf9.cffd64",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "topic": "",
+        "format": "{{value}} s",
+        "min": 0,
+        "max": "30",
+        "step": "5",
+        "x": 470,
+        "y": 620,
+        "wires": [
+            [
+                "8c4f74f1.b720b8"
+            ]
+        ]
+    },
+    {
+        "id": "215c4fa4.01b16",
+        "type": "ui_numeric",
+        "z": "c13abdff.e0442",
+        "name": "",
+        "label": "Zobrazení času",
+        "tooltip": "",
+        "group": "6c047cf9.cffd64",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "topic": "",
+        "format": "{{value}} s",
+        "min": "5",
+        "max": "60",
+        "step": "5",
+        "x": 460,
+        "y": 560,
+        "wires": [
+            [
+                "b7146205.cb877"
+            ]
+        ]
+    },
+    {
+        "id": "8c4f74f1.b720b8",
+        "type": "change",
+        "z": "c13abdff.e0442",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "tempInterval",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b7146205.cb877",
+        "type": "change",
+        "z": "c13abdff.e0442",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timeInterval",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d8781a4f.d1a2e8",
+        "type": "function",
+        "z": "c13abdff.e0442",
+        "name": "format to hh:mm",
+        "func": "let date = new Date(msg.payload);\nmsg.payload = \"\" + date.getHours().toString().padStart(2, '0') + date.getMinutes().toString().padStart(2, '0');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 500,
+        "y": 360,
+        "wires": [
+            [
+                "82bf722f.caad1"
+            ]
+        ]
+    },
+    {
+        "id": "51377a4a.50eda4",
+        "type": "change",
+        "z": "c13abdff.e0442",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temperature",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "82bf722f.caad1",
+        "type": "function",
+        "z": "c13abdff.e0442",
+        "name": "output logic",
+        "func": "var TICK_INTERVAL = 5;\n\nvar timeInterval = (flow.get('timeInterval') || 10) / TICK_INTERVAL;\nvar tempInterval = (flow.get('tempInterval') || 5) / TICK_INTERVAL;\nvar period = tempInterval + timeInterval;\nvar currentTime = msg.payload;\n\nvar counter = (context.get('counter') || 0) % period;\nvar msg = {color: [64, 64, 64]}\n\nif (flow.get('text')) {\n    msg.payload = flow.get('text');\n} else if (counter < timeInterval) {\n    msg.payload = currentTime;\n} else if (counter < (timeInterval + timeInterval)) {\n    msg.payload = Math.round(flow.get('temperature') * 10 ) / 10;\n} else {\n    this.error('bleeh');\n}\n++counter;\nnode.status({text: (counter * TICK_INTERVAL).toString() + \": \" + msg.payload});\n\ncontext.set('counter', counter);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 490,
+        "y": 420,
+        "wires": [
+            [
+                "38096a26.a36536",
+                "5a2d81e5.9c875"
+            ]
+        ]
+    },
+    {
+        "id": "868c5db2.2fa62",
+        "type": "comment",
+        "z": "c13abdff.e0442",
+        "name": "Řízení LED displeje - logika výstupních dat",
+        "info": "",
+        "x": 640,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e7fb7028.b19c2",
+        "type": "comment",
+        "z": "c13abdff.e0442",
+        "name": "Uložení vstupních dat",
+        "info": "",
+        "x": 640,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "7d6aae5a.79e2",
+        "type": "comment",
+        "z": "c13abdff.e0442",
+        "name": "Teplota",
+        "info": "",
+        "x": 470,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "cb054699.412dd8",
+        "type": "fis-node",
+        "z": "",
+        "broker": "4cc2da09.0e1204",
+        "nodeId": "30aea4ff3d14",
+        "name": "FIS ESP 4"
+    },
+    {
+        "id": "6c047cf9.cffd64",
+        "type": "ui_group",
+        "z": "",
+        "name": "Displej",
+        "tab": "a05646ed.08dc68",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "4cc2da09.0e1204",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "fis.josefkolar.cz",
+        "broker": "fis.josefkolar.cz",
+        "port": "1883",
+        "clientid": "node-red",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "a05646ed.08dc68",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Místnost",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
